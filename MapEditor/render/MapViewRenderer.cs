@@ -102,7 +102,8 @@ namespace MapEditor.render
                 Tiles2 = Pens.Yellow;
                 Tiles = Pens.Gray;
                 Walls = Brushes.White;
-                Background = Color.Black;
+                //Background = Color.Black;
+                Background = Color.Transparent;
                 Objects = Pens.Blue;
                 WallsBreakable = Color.Red;
                 WallsWindowed = Color.Orange;
