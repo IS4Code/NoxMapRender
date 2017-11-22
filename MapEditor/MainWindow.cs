@@ -160,31 +160,91 @@ namespace MapEditor
         {
             Instance = this;
             // Show the loading splash screen
-            Splash spl = new Splash();
+
+            /*Splash spl = new Splash();
             spl.Show();
-            spl.Refresh();
-            // Setup locales
-            string m_ExePath = Process.GetCurrentProcess().MainModule.FileName;
-            Environment.CurrentDirectory = Path.GetDirectoryName(m_ExePath);
-            cultures = GetSupportedCultures();
-            InitializeComponent();
+            spl.Refresh();*/
 
-            // Set up map type selector (arena by default)
-            mapType.Items.AddRange(new ArrayList(Map.MapInfo.MapTypeNames.Values).ToArray());
-            mapType.SelectedIndex = 3;
-            // load categories xml
-            mapView.LoadObjectCategories();
-
-            // Keep up shortcut menus with current settings
-            menuShowGrid.Checked = EditorSettings.Default.Draw_Grid;
-            menuUseNewRenderer.Checked = EditorSettings.Default.Edit_PreviewMode;
-
-            LoadNewMap();
-            if (args.Length > 0)
+            try
             {
-                if (File.Exists(args[0])) MapInterface.SwitchMap(args[0]);
+                string mapInput;
+                if(args.Length >= 1)
+                {
+                    if(File.Exists(args[0]))
+                    {
+                        mapInput = args[0];
+                    } else
+                    {
+                        Console.WriteLine("Input map doesn't exist.");
+                        return;
+                    }
+                } else
+                {
+                    Console.WriteLine("Map file path must be specified.");
+                    return;
+                }
+
+                string bitmapOutput;
+                if(args.Length >= 2)
+                {
+                    bitmapOutput = args[1];
+                } else
+                {
+                    Console.WriteLine("Output image path must be specified.");
+                    return;
+                }
+
+                // Setup locales
+                string m_ExePath = Process.GetCurrentProcess().MainModule.FileName;
+                Environment.CurrentDirectory = Path.GetDirectoryName(m_ExePath);
+                cultures = GetSupportedCultures();
+                InitializeComponent();
+
+                this.Visible = false;
+
+                // Set up map type selector (arena by default)
+                mapType.Items.AddRange(new ArrayList(Map.MapInfo.MapTypeNames.Values).ToArray());
+                mapType.SelectedIndex = 3;
+                // load categories xml
+                mapView.LoadObjectCategories();
+
+                // Keep up shortcut menus with current settings
+                menuShowGrid.Checked = EditorSettings.Default.Draw_Grid;
+                menuUseNewRenderer.Checked = EditorSettings.Default.Edit_PreviewMode;
+
+                //LoadNewMap();
+                MapInterface.SwitchMap(mapInput);
+
+                Bitmap mapBitmap = mapView.MapToImage();
+                if(mapBitmap != null)
+                {
+                    System.Drawing.Imaging.ImageFormat imageFormat;
+                    switch(Path.GetExtension(bitmapOutput).ToUpperInvariant())
+                    {
+                        case ".BMP":
+                            imageFormat = System.Drawing.Imaging.ImageFormat.Bmp; // Does this export?
+                            break;
+                        case ".JPG":
+                            imageFormat = System.Drawing.Imaging.ImageFormat.Jpeg; // Only PNG right?
+                            break;
+                        case ".PNG":
+                            imageFormat = System.Drawing.Imaging.ImageFormat.Png; // Why have the other options?
+                            break;
+                        default:
+                            Console.WriteLine("Unknown output image format.");
+                            return;
+                    }
+                    mapBitmap.Save(bitmapOutput, imageFormat);
+                    Console.WriteLine("Done!");
+                } else
+                {
+                    Console.WriteLine("Cannot render map image.");
+                }
+            } finally
+            {
+                Environment.Exit(0);
             }
-            spl.Close();
+            //spl.Close();
         }
 
         #region Windows Form Designer generated code
@@ -1354,7 +1414,7 @@ namespace MapEditor
         #endregion
 
         [STAThread]
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             Logger.Init();
 
@@ -1363,12 +1423,14 @@ namespace MapEditor
             {
 #endif
             Application.Run(new MainWindow(args));
+            return 0;
 #if !DEBUG
 			}
 			catch (Exception ex)
 			{
-				new ExceptionDialog(ex, "Exception in main loop").ShowDialog();
-				Environment.Exit(-1);
+				//new ExceptionDialog(ex, "Exception in main loop").ShowDialog();
+            Console.WriteLine(ex.ToString());
+				return -1;
 			}
 #endif
         }

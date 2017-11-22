@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly, changez les valeurs de ces attributs.
 //
-[assembly: AssemblyTitle("")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Nox Map Image Renderer")]
+[assembly: AssemblyDescription("Forked from NoxEditor by Eric Litak, Andrew Wesie, *Templar*, Joshua Statzer, and updated and enhanced by AngryKirC, SuperJack and Protokol")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("IllidanS4")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
