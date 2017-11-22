@@ -145,7 +145,7 @@ namespace MapEditor.render
                 //MessageBox.Show(usingTileMaterial.ToString());
                 else
                 {
-                    Brush tembrush = new SolidBrush(tile.col);
+                    /*Brush tembrush = new SolidBrush(tile.col);
                    
 
                     if (MainWindow.Instance.mapView.EdgeMakeNewCtrl.ignoreAllBox.Checked && EditorSettings.Default.Edit_PreviewMode)
@@ -165,7 +165,7 @@ namespace MapEditor.render
                     if (tile.EdgeTiles.Count > 0)
                         g.FillEllipse(Brushes.YellowGreen, ellTL.X, ellTL.Y, diam, diam);
                     else
-                        g.DrawEllipse(Pens.Brown, ellTL.X, ellTL.Y, diam, diam);
+                        g.DrawEllipse(Pens.Brown, ellTL.X, ellTL.Y, diam, diam);*/
                 }
 
                 PointF nwCorner2 = nwCorner;

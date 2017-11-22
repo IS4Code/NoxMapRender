@@ -566,6 +566,15 @@ namespace MapEditor.render
                         sortedObjectList.Add(obj);
                 }
             }
+
+            int wallIndex = 0;
+            foreach(Map.Wall wall in mapRenderer.Map.Walls.Values)
+            {
+                if(!wall.Material.Contains("Invisible"))
+                {
+                    sortedObjectList.Add(new FakeWallObject(wallIndex++, wall, mapRenderer));
+                }
+            }
             sortedObjectList.Sort(new ObjectZComparer());
             belowObjectList.Sort(new ObjectZComparer());
         }
@@ -611,6 +620,13 @@ namespace MapEditor.render
 
                 foreach (Map.Object oe in objects)
                 {
+                    var customRender = oe as CustomRenderObject;
+                    if(customRender != null)
+                    {
+                        customRender.Render(g);
+                        continue;
+                    }
+
                     ptf = oe.Location;
                     float x = ptf.X, y = ptf.Y;
                     tt = ThingDb.Things[oe.Name];
@@ -665,8 +681,8 @@ namespace MapEditor.render
                         {
                             if (shadow)
                                 DrawObjectExtent(g, oe, drawExtents3D);
-                            else
-                                DrawTriggerExtent(g, oe, underCursor);
+                            //else
+                            //    DrawTriggerExtent(g, oe, underCursor);
                             continue;
                         }
                         // black powder
@@ -675,13 +691,13 @@ namespace MapEditor.render
                     {
                         if (tt.DrawType == "BlackPowderDraw")
                         {
-                            Rectangle bp = new Rectangle((int)x - 2, (int)y - 2, 4, 4);
-                            g.FillRectangle(new SolidBrush(Color.Gray), bp);
+                           /* Rectangle bp = new Rectangle((int)x - 2, (int)y - 2, 4, 4);
+                            g.FillRectangle(new SolidBrush(Color.Gray), bp);*/
                             continue;
                         }
                         if (tt.Xfer == "InvisibleLightXfer")
                         { 
-                            bool isUnderCursor = false;
+                            /*bool isUnderCursor = false;
 
                             Pen Penlight = new Pen(Color.Yellow, 1);
                             if (underCursor != null) isUnderCursor = underCursor.Equals(oe);
@@ -709,23 +725,23 @@ namespace MapEditor.render
                             g.DrawEllipse(Penlight, new RectangleF(center.X - 9, center.Y - 9, 18, 18));
                             g.DrawEllipse(Penlight, new RectangleF(center.X - 13, center.Y - 13, 26, 26));
                             g.DrawEllipse(Penlight, new RectangleF(center.X - 17, center.Y - 17, 34, 34));
-                            
+                            */
                             continue;
                         }
                         
                         Bitmap image = GetObjectImage(oe, shadow);
                        
-                        if (tt.Name.StartsWith("Amb") && image == null)
+                        /*if (tt.Name.StartsWith("Amb") && image == null)
                         {
                             image = mapRenderer.VideoBag.GetBitmap(tt.SpriteMenuIcon);
                             drawOffsetX = 82;
                             drawOffsetY = 122;
-                        }
+                        }*/
                    
                         if (image == null || tt.DrawType == "NoDraw")
                         {
                             // in case of failure draw only the extent
-                            DrawObjectExtent(g, oe, drawExtents3D);
+                            //DrawObjectExtent(g, oe, drawExtents3D);
 
 
                         }

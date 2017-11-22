@@ -149,7 +149,7 @@ namespace MapEditor.render
                 BitmapShader shader = null;
                 // тонируем если стена необычная
 
-                if (wall.Destructable || wall.Secret || transparent || beingSelected || mapView.picking)
+                /*if (wall.Destructable || wall.Secret || transparent || beingSelected || mapView.picking)
                 {
                     shader = new BitmapShader(bitmap);
                     shader.LockBitmap();
@@ -178,7 +178,7 @@ namespace MapEditor.render
                     if (transparent)
                         shader.MakeSemitransparent();
                     bitmap = shader.UnlockBitmap();
-                }
+                }*/
 
                 // допускается что стена одновременно и секретная, и разрушаемая, и с окном
                 int x, y;
@@ -682,9 +682,11 @@ namespace MapEditor.render
                         if (DrawTextured && !wall.Material.Contains("Invisible"))
                         {
 
-                            DrawTexturedWall(g, wall, false, removing == wall);
+                            //DrawTexturedWall(g, wall, false, removing == wall);
                             continue;
                         }
+
+                        continue;
 
                         //TODO: how to draw if a destructable window? is this even possible?
 

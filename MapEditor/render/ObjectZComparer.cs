@@ -21,6 +21,17 @@ namespace MapEditor.render
 	
 		public int Compare(Map.Object a, Map.Object b)
 		{
+            var wallA = a as FakeWallObject;
+            if(wallA != null)
+            {
+                return wallA.CompareTo(b);
+            }
+            var wallB = b as FakeWallObject;
+            if(wallB != null)
+            {
+                return -wallB.CompareTo(a);
+            }
+
 			ThingDb.Thing tt1 = ThingDb.Things[a.Name];
 			ThingDb.Thing tt2 = ThingDb.Things[b.Name];
 			int y = (int) ((a.Location.Y + tt1.Z) - (b.Location.Y + tt2.Z));

@@ -37,7 +37,7 @@ namespace MapEditor {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Draw_AllText {
             get {
                 return ((bool)(this["Draw_AllText"]));
@@ -97,7 +97,7 @@ namespace MapEditor {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Draw_Grid {
             get {
                 return ((bool)(this["Draw_Grid"]));
@@ -109,7 +109,7 @@ namespace MapEditor {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Draw_ObjCustomLabels {
             get {
                 return ((bool)(this["Draw_ObjCustomLabels"]));
@@ -121,7 +121,7 @@ namespace MapEditor {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Draw_ObjectFacing {
             get {
                 return ((bool)(this["Draw_ObjectFacing"]));
@@ -145,7 +145,7 @@ namespace MapEditor {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Draw_ObjTeams {
             get {
                 return ((bool)(this["Draw_ObjTeams"]));
@@ -169,7 +169,7 @@ namespace MapEditor {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Draw_Polygons {
             get {
                 return ((bool)(this["Draw_Polygons"]));
