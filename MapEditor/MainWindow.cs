@@ -1413,6 +1413,33 @@ namespace MapEditor
         private System.Windows.Forms.CheckBox checkServPlayerLimit;
         #endregion
 
+        private static Assembly AssemblyResolve(object sender, ResolveEventArgs e)
+        {
+            if(e.Name == "NoxShared, Version=0.0.0.4, Culture=neutral, PublicKeyToken=null")
+            {
+                Stream res = Assembly.GetExecutingAssembly().GetManifestResourceStream("MapEditor.NoxShared.dll.gz");
+                using(var output = new MemoryStream())
+                {
+                    using(var gzip = new System.IO.Compression.GZipStream(res, System.IO.Compression.CompressionMode.Decompress))
+                    {
+                        var buffer = new byte[4096];
+                        int read;
+                        while((read = gzip.Read(buffer, 0, buffer.Length)) != 0)
+                        {
+                            output.Write(buffer, 0, read);
+                        }
+                    }
+                    return Assembly.Load(output.ToArray());
+                }
+            }
+            return null;
+        }
+
+        static MainWindow()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve;
+        }
+
         [STAThread]
         static int Main(string[] args)
         {

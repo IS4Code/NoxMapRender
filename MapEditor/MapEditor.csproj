@@ -607,6 +607,7 @@
       <LastGenOutput>EditorSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="MapEditor_TemporaryKey.pfx" />
+    <EmbeddedResource Include="NoxShared.dll.gz" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
